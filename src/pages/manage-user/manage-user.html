@@ -1,0 +1,86 @@
+
+<ion-header>
+        <ion-navbar>
+          <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+          <ion-title>User Information</ion-title>
+        </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngIf= "pagemode == 'view' || pagemode == 'adminview'">
+    <ion-item>
+      <ion-label fixed><b>Email</b></ion-label>
+  userDate:any;
+  <ion-input type="text" [(ngModel)]="email" disabled></ion-input>
+    </ion-item>  
+    <ion-item>
+      <ion-label fixed><b>Name</b></ion-label>
+  userDate:any;
+  <ion-input type="text" [(ngModel)]="name" disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed><b>Contact</b></ion-label>
+      <ion-input type="number" [(ngModel)]="contact" disabled></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed><b>Password</b></ion-label>
+      <ion-input type="password" [(ngModel)]="password" disabled></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf= "pagemode == 'add' || pagemode == 'edit'">
+      <ion-item>
+        <ion-label fixed>Email</ion-label>
+    <ion-input type="text" [(ngModel)]="email" ></ion-input>
+      </ion-item>  
+      <ion-item>
+        <ion-label fixed>Name</ion-label>
+    <ion-input type="text" [(ngModel)]="name" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Contact</ion-label>
+        <ion-input type="number" [(ngModel)]="contact" ></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label fixed>Account Type</ion-label>
+          <ion-select [(ngModel)]="accountType">
+              <ion-option value="user">user</ion-option>
+              <ion-option value="admin">admin</ion-option>
+            </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Password</ion-label>
+        <ion-input type="password" [(ngModel)]="password" ></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <button ion-button block *ngIf="pagemode == 'add'" (click)="create()" id="btnCreateUser">Create</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col>
+        <button ion-button block *ngIf="pagemode == 'edit'" (click)="update()" id="btnUpdateUser">Update</button>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+      
+
+
+  <ion-list *ngIf= "pagemode == 'adminview'">
+    <ion-list *ngFor="let data of eventList"> 
+      <ion-labe>Booked Event</ion-labe>
+      <ion-item>
+            {{data.eventname}}   
+      <button ion-button color="light" item-end> {{data.bookedDate}}   </button> 
+      </ion-item>
+</ion-list>
+</ion-list>
+</ion-content>

@@ -1,0 +1,48 @@
+<ion-content text-center>
+  <div class="bg">
+    <div class="head" text-center>
+      <img src="../../assets/imgs/logo2.jpg" width="200px" height="200px" id="logo">
+    </div>
+    <div class="inputs">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <div>
+              <ion-item id='loginEmail'>
+                <ion-label floating>Email</ion-label>
+                <ion-input type="email" [(ngModel)]="userName"></ion-input>
+              </ion-item>
+              <ion-item id='loginPassword'>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" [(ngModel)]="passWord"></ion-input>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="8">
+            <div>
+              <ion-item class="rememberMe">
+                <ion-label>Remember Me</ion-label>
+                <ion-checkbox [(ngModel)]="rememberMe"></ion-checkbox>
+              </ion-item>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <p>Forgot Password?</p>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div>
+              <button ion-button (click)="signin()" (click)="presentLoading()" id="btnLogin"><b>Login</b></button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+</ion-content>

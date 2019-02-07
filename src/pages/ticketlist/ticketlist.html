@@ -1,0 +1,86 @@
+<!--
+  Generated template for the AdHocTicketsDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Events</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="refresh()"><ion-icon name="refresh"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding *ngIf= "accountType == 'admin'">
+    <ion-searchbar (ionInput)="getItems()" [(ngModel)]="searchbar"></ion-searchbar>
+    <div padding>
+      <ion-segment>
+        <ion-segment-button value="data.eventType" *ngFor="let data of evType" (click)="togglePage(data.eventType)">
+          {{data.eventType}}
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <ion-list *ngFor="let data of data"> 
+        <ion-item-sliding >
+        <ion-item  (click)="navPage(data.eventCode)">
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col><h1>{{data.eventname}}</h1></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><img src="http://172.22.85.131:8080/imageTest/uploads/{{data.imageName}}"></ion-col>
+          </ion-row>           
+          <button ion-button color="light" item-end>{{data.status}}</button>     
+        </ion-item>
+
+        <ion-item-options side="right">
+            <button ion-button color="primary" (click)="Edit(data)">
+                  <ion-icon name="ios-create"  ></ion-icon>
+                  Edit
+            </button>
+            <button ion-button color="danger" (click)="presentConfirm(data)" >
+              <ion-icon name="ios-trash" ></ion-icon>
+              Delete
+            </button>
+          </ion-item-options>
+ 
+  </ion-item-sliding>
+  </ion-list>
+  <ion-fab right bottom >
+    <button ion-fab mini (click)="addEventPage()"><ion-icon name="add" ></ion-icon></button>
+  </ion-fab>
+</ion-content>
+  <ion-content padding *ngIf= "accountType == 'user'">
+    <ion-searchbar (ionInput)="getItems()" [(ngModel)]="searchbar"></ion-searchbar>
+    <div padding>
+      <ion-segment>
+        <ion-segment-button value="data.eventType" *ngFor="let data of evType" (click)="togglePage(data.eventType)">
+          {{data.eventType}}
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <ion-list *ngFor="let data of data"> 
+        <ion-item >
+        <ion-item  (click)="navPage(data.eventCode)">
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col><h1>{{data.eventname}}</h1></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col><img src="http://172.22.85.131:8080/imageTest/uploads/{{data.imageName}}"></ion-col>
+          </ion-row>           
+        </ion-item>
+
+  </ion-item>
+  </ion-list>
+
+</ion-content>

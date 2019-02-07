@@ -1,0 +1,81 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Add Event</ion-title>
+    </ion-navbar>
+
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label color="primary">Event Name</ion-label>
+            <ion-input [(ngModel)]="eventName"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary">Event Type</ion-label>
+            <ion-input placeholder="Event Type" [(ngModel)]="eventType"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary">Start Date</ion-label>
+            <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="startDate"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary">End Date</ion-label>
+            <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="endDate"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary">Quantity</ion-label>
+            <ion-input type="number" min="1" [(ngModel)]="quantity"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary">Location</ion-label>
+            <ion-input [(ngModel)]="location" ></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary">Event Description</ion-label>
+            <ion-textarea [(ngModel)]="description" ></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary">Publish Time</ion-label>
+            <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="publishTime"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="primary">Ballot Option</ion-label>
+            <ion-toggle checked="false" [(ngModel)]="toggleStatus"></ion-toggle>
+        </ion-item>
+        <ion-item>
+                <ion-label color="primary">Is this event recurring</ion-label>
+                <ion-toggle checked="false" [(ngModel)]="recurring"></ion-toggle>
+        </ion-item>
+
+
+        <ion-buttons>
+            <button ion-button icon-left (click)="presentActionSheet()">
+                <ion-icon name="camera"></ion-icon>Select Image
+            </button>
+            <ion-item *ngIf="lastImage">
+                    <h4>Image selected</h4>
+                  </ion-item>
+        </ion-buttons>
+        <hr>
+        <br>
+        <br>
+        <ion-row *ngIf= "pagemode == 'add'">
+            <ion-col></ion-col>
+            <ion-col><ion-button ion-button full icon-left (click)="eventCreate()" id="addEvent">Add Event</ion-button></ion-col>
+            <ion-col></ion-col>
+        </ion-row>
+        <ion-row *ngIf= "pagemode == 'edit'">
+                <ion-col></ion-col>
+                <ion-col><ion-button ion-button full icon-left (click)="updateEvent()" id="addEvent">update Event</ion-button></ion-col>
+                <ion-col></ion-col>
+            </ion-row>
+        

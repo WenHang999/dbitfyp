@@ -1,0 +1,68 @@
+<!--
+  Generated template for the BookedDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Booked Event Detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <img src="http://172.22.85.131:8080/imageTest/uploads/{{data.imageName}}">
+      <ion-grid>
+        <ion-row>
+          <ion-card-title><b>{{data.eventname}}</b></ion-card-title>
+        </ion-row>
+        <ion-row class="blankspace">
+          <p></p>
+        </ion-row>
+
+        <ion-row><b>Event Type</b> : {{data.eventType}}</ion-row>
+        <ion-row class="blankspace">
+          <p></p>
+        </ion-row>
+        <ion-row><b>Description</b> : {{data.description}}</ion-row>
+        <ion-row><b>Date</b> : {{data.startDate}} to {{data.endDate}}</ion-row>
+        <ion-row><b>Location</b> : {{data.location}}</ion-row>
+        <br>
+        <ion-row *ngIf="ballotOption == 'yes'" >
+          <ion-col id="status" ><b>Status</b> : {{status}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-item>
+            <ion-col><b>Booked Date</b> : {{data.bookedDate}}</ion-col>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <button ion-button block outline (click)="cancelBooking(data.bookingID)">Cancel Booking</button>
+        </ion-row>
+        <br>
+        <br>
+        <ion-row>
+          <ion-col><b>Add Rating & Comment</b></ion-col>
+        </ion-row>
+        <ion-row>
+          <ionic3-star-rating activeIcon="ios-star" defaultIcon="ios-star-outline" activeColor="#488aff" defaultColor="red"
+            readonly="false" [rating]="rating">
+          </ionic3-star-rating>
+        </ion-row>
+        <ion-row>
+          <ion-textarea placeholder="Enter comment" [(ngModel)]="strComment"></ion-textarea>
+        </ion-row>
+        <ion-row>
+          <button ion-button block outline (click)="comment()">Submit Comment</button>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

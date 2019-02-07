@@ -1,0 +1,125 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button [disabled]="isToday" (click)="today()">Today</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content *ngIf="accountType == 'admin'">
+  <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+    <h4 class="selectedEventDate">{{viewTitle}}</h4>
+    <h5 class="noEvents" *ngIf="selectedDate.events.length == 0">No Event</h5>
+    <ion-list>
+      <ion-row>
+        <ion-card *ngFor="let event of selectedDate.events">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <div>
+                  <img src="http://172.22.71.53/Test/uploads/{{event.img}}">
+                </div>
+              </ion-col>
+              <ion-col size="8">
+                <div>
+                  <h1 id='eventTitle'>{{event.title}}</h1>
+                  <br>
+                  <br>
+                  <p id="bookedBy">Booked By: <b>{{event.userName}}</b></p>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-row>
+    </ion-list>
+    <!-- display all event when Today is selected -->
+    <ion-list *ngIf="isToday == true">
+      <h4 id='txtAllBookedEvent'>All Booked Event</h4>
+      <ion-segment>
+        <ion-segment-button *ngFor="let data of evType" value="data.eventType" (click)="togglePage(data.eventType)">
+          {{data.eventType}}
+        </ion-segment-button>
+      </ion-segment>
+      <ion-card *ngFor="let event of eventSource">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div>
+                <img src="http://172.22.71.53/Test/uploads/{{event.img}}">
+              </div>
+            </ion-col>
+            <ion-col size="8">
+              <div>
+                <h1 id='eventTitle'>{{event.title}}</h1>
+                <br>
+                <br>
+                <p id="bookedBy">Booked By: <b>{{event.userName}}</b></p>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-list>
+  </ng-template>
+  <calendar id="cal" [monthviewEventDetailTemplate]="template" [eventSource]="eventSource" [calendarMode]="calendar.mode"
+    [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
+    (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30">
+  </calendar>
+</ion-content>
+<ion-content *ngIf="accountType == 'user'">
+  <ng-template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+    <h4 class="selectedEventDate">{{viewTitle}}</h4>
+    <h5 class="noEvents" *ngIf="selectedDate.events.length == 0">No Event</h5>
+    <ion-list>
+      <ion-row>
+        <ion-card (click)="onEventSelected(event)" *ngFor="let event of selectedDate.events">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <div>
+                  <img src="http://172.22.71.53/Test/uploads/{{event.img}}">
+                </div>
+              </ion-col>
+              <ion-col size="8">
+                <div>
+                  <h1 id='eventTitle'>{{event.title}}
+                  </h1>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-row>
+    </ion-list>
+    <!-- display all event when Today is selected -->
+    <ion-list *ngIf="isToday == true">
+      <h4 id='txtAllBookedEvent'>All Booked Event</h4>
+      <ion-card (click)="onEventSelected(event)" *ngFor="let event of eventSource">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <div>
+                <img src="http://172.22.85.131:8080/imageTest/uploads/{{event.img}}">
+              </div>
+            </ion-col>
+            <ion-col size="8">
+              <div>
+                <h1 id='eventTitle'>{{event.title}}</h1>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-list>
+  </ng-template>
+
+  <calendar [monthviewEventDetailTemplate]="template" [eventSource]="eventSource" [calendarMode]="calendar.mode"
+    [currentDate]="calendar.currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
+    (onTitleChanged)="onViewTitleChanged($event)" (onTimeSelected)="onTimeSelected($event)" step="30">
+  </calendar>
+</ion-content>
